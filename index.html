@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Événement PME - Attijariwafa bank</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; color: #333; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 700px; width: 100%; margin: auto; }
+        h1 { color: #005A9E; /* Couleur Attijariwafa */ text-align: center; }
+        h2 { color: #005A9E; border-bottom: 2px solid #D40028; padding-bottom: 5px; margin-top: 30px; }
+        .step { display: none; animation: fadeIn 0.5s; }
+        .step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.95em; }
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+            width: calc(100% - 22px); padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px;
+            box-sizing: border-box; font-size: 1em;
+        }
+        input:focus, select:focus, textarea:focus { border-color: #005A9E; outline: none; box-shadow: 0 0 5px rgba(0,90,158,0.3); }
+        textarea { resize: vertical; min-height: 80px; }
+        .button-group { margin-top: 30px; text-align: right; display: flex; justify-content: space-between; }
+        button {
+            background-color: #D40028; /* Couleur Attijariwafa */
+            color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer;
+            font-size: 16px; transition: background-color 0.3s ease;
+        }
+        button:hover { background-color: #A8001F; }
+        button.prev { background-color: #6c757d; }
+        button.prev:hover { background-color: #545b62; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        .error-message { color: red; font-size: 0.9em; margin-top: 5px; }
+        .progress-bar-container { width: 100%; background-color: #e0e0e0; border-radius: 4px; margin-bottom: 25px; overflow: hidden; }
+        .progress-bar-fill { height: 12px; background-color: #005A9E; border-radius: 4px; width: 0%; transition: width 0.4s ease-in-out; text-align: center; color: white; font-size: 0.7em; line-height: 12px;}
+        .checkbox-group, .radio-group { margin-top: 10px; }
+        .checkbox-group label, .radio-group label { font-weight: normal; display: inline-flex; align-items: center; margin-right: 15px; margin-bottom: 8px; cursor: pointer; }
+        .checkbox-group input, .radio-group input { margin-right: 8px; cursor: pointer; width: auto; }
+        .field-description { font-size: 0.85em; color: #555; margin-top: 3px; }
+        .required-asterisk { color: red; margin-left: 2px;}
+        #confirmationMessage { text-align:center; padding:30px; background-color:#e6ffed; border:1px solid #005A9E; border-radius:5px; margin-top:20px; animation: fadeIn 0.5s; }
+        #confirmationMessage h2 { border-bottom: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Inscription Événement PME <br/>Attijariwafa bank</h1>
+    <p style="text-align:center; margin-bottom:20px;">Merci de remplir ce formulaire pour confirmer votre participation à notre prochain événement. <br/>[Ajoutez ici la date, l'heure et le lieu si connus]</p>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+    </div>
+
+    <form id="eventForm" novalidate>
+        <!-- Étape 1: Informations Personnelles et Entreprise -->
+        <div class="step active" id="step1">
+            <h2>Étape 1: Vos Informations</h2>
+            <div>
+                <label for="nom">Nom complet <span class="required-asterisk">*</span></label>
+                <input type="text" id="nom" name="nom" required>
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="prenom">Prénom <span class="required-asterisk">*</span></label>
+                <input type="text" id="prenom" name="prenom" required>
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="entreprise">Nom de l'entreprise <span class="required-asterisk">*</span></label>
+                <input type="text" id="entreprise" name="entreprise" required>
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="poste">Poste / Fonction <span class="required-asterisk">*</span></label>
+                <input type="text" id="poste" name="poste" required>
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="email">Adresse e-mail professionnelle <span class="required-asterisk">*</span></label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="telephone">Numéro de téléphone professionnel <span class="required-asterisk">*</span></label>
+                <input type="tel" id="telephone" name="telephone" required>
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="secteur">Secteur d'activité <span class="required-asterisk">*</span></label>
+                <select id="secteur" name="secteur" required>
+                    <option value="">-- Choisir --</option>
+                    <option value="agroalimentaire">Agroalimentaire</option>
+                    <option value="btp">BTP</option>
+                    <option value="services">Services</option>
+                    <option value="technologie">Technologie</option>
+                    <option value="industrie">Industrie</option>
+                    <option value="commerce">Commerce</option>
+                    <option value="autre_secteur">Autre</option>
+                </select>
+                <input type="text" id="autreSecteurInput" name="autreSecteurInput" placeholder="Précisez votre secteur" style="display:none; margin-top:5px;">
+                <div class="error-message"></div>
+            </div>
+            <div>
+                <label for="taille">Taille de votre entreprise (employés) <span class="required-asterisk">*</span></label>
+                <select id="taille" name="taille" required>
+                     <option value="">-- Choisir --</option>
+                    <option value="moins_10">Moins de 10</option>
+                    <option value="10_49">10-49</option>
+                    <option value="50_249">50-249</option>
+                    <option value="plus_250">250 et plus</option>
+                </select>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Étape 2: Statut et Participation -->
+        <div class="step" id="step2">
+            <h2>Étape 2: Votre Statut & Participation</h2>
+            <div class="radio-group">
+                <label>Êtes-vous déjà client PME d'Attijariwafa bank ? <span class="required-asterisk">*</span></label>
+                <div>
+                    <input type="radio" id="clientOui" name="statutClient" value="oui" required> <label for="clientOui">Oui</label>
+                </div>
+                <div>
+                    <input type="radio" id="clientNon" name="statutClient" value="non"> <label for="clientNon">Non, je suis un prospect</label>
+                </div>
+                <div class="error-message"></div>
+            </div>
+            <div class="radio-group" style="margin-top: 20px;">
+                <label>Confirmez-vous votre participation à l'événement ? <span class="required-asterisk">*</span></label>
+                <div>
+                    <input type="radio" id="participeOui" name="participation" value="oui" required> <label for="participeOui">Oui, je serai présent(e)</label>
+                </div>
+                <div>
+                    <input type="radio" id="participeNon" name="participation" value="non"> <label for="participeNon">Non, je ne pourrai malheureusement pas être présent(e)</label>
+                </div>
+                <div>
+                    <input type="radio" id="participePeutEtre" name="participation" value="peut-etre"> <label for="participePeutEtre">Peut-être (confirmation avant le [date limite])</label>
+                </div>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Étape 3: Mise en Relation Experts (Conditionnelle) -->
+        <div class="step" id="step3" data-condition-field="participation" data-condition-values="oui,peut-etre">
+            <h2>Étape 3: Rencontre avec nos Experts AWB</h2>
+            <div class="radio-group">
+                <label>Souhaitez-vous un entretien individuel avec un expert AWB ? <span class="required-asterisk">*</span></label>
+                <div>
+                    <input type="radio" id="expertOui" name="rdvExpert" value="oui" required> <label for="expertOui">Oui</label>
+                </div>
+                <div>
+                    <input type="radio" id="expertNon" name="rdvExpert" value="non"> <label for="expertNon">Non</label>
+                </div>
+                <div>
+                    <input type="radio" id="expertPeutEtre" name="rdvExpert" value="peut-etre"> <label for="expertPeutEtre">Peut-être, selon les disponibilités</label>
+                </div>
+                 <div class="error-message"></div>
+            </div>
+            <div id="domainesExpertiseWrapper" style="display:none; margin-top: 15px;" class="checkbox-group" data-condition-field="rdvExpert" data-condition-values="oui,peut-etre">
+                <label>Quels domaines d'expertise vous intéressent particulièrement ? (Plusieurs choix possibles)</label>
+                <div><input type="checkbox" id="financement" name="domaines" value="financement"> <label for="financement">Financement de projets / Investissement</label></div>
+                <div><input type="checkbox" id="tresorerie" name="domaines" value="tresorerie"> <label for="tresorerie">Solutions de trésorerie et cash management</label></div>
+                <div><input type="checkbox" id="international" name="domaines" value="international"> <label for="international">Accompagnement à l'international (Trade Finance, etc.)</label></div>
+                <div><input type="checkbox" id="monetique" name="domaines" value="monetique"> <label for="monetique">Solutions Monétiques</label></div>
+                <div><input type="checkbox" id="digital" name="domaines" value="digital"> <label for="digital">Banque Digitale et services en ligne</label></div>
+                <div><input type="checkbox" id="patrimoine" name="domaines" value="patrimoine"> <label for="patrimoine">Conseil en gestion patrimoniale du dirigeant</label></div>
+                <div><input type="checkbox" id="assurance" name="domaines" value="assurance"> <label for="assurance">Solutions d'assurance pour PME</label></div>
+                <div>
+                    <input type="checkbox" id="autre_domaine_expert_cb" name="domaines" value="autre_expert"> <label for="autre_domaine_expert_cb">Autre</label>
+                    <input type="text" id="autreDomaineExpertInput" name="autreDomaineExpertInput" placeholder="Précisez le domaine" style="display:none; margin-top:5px; width: calc(100% - 100px); margin-left:25px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Étape 4: Rencontres B2B (Conditionnelle) -->
+        <div class="step" id="step4" data-condition-field="participation" data-condition-values="oui,peut-etre">
+            <h2>Étape 4: Opportunités B2B</h2>
+            <div class="radio-group">
+                <label>Intéressé(e) par des rencontres B2B pré-organisées ? <span class="required-asterisk">*</span></label>
+                <div><input type="radio" id="b2bOuiTres" name="interesseB2B" value="oui_tres" required> <label for="b2bOuiTres">Oui, très intéressé(e)</label></div>
+                <div><input type="radio" id="b2bOuiPot" name="interesseB2B" value="oui_potentiellement"> <label for="b2bOuiPot">Oui, potentiellement</label></div>
+                <div><input type="radio" id="b2bNon" name="interesseB2B" value="non"> <label for="b2bNon">Non, pas pour le moment</label></div>
+                <div class="error-message"></div>
+            </div>
+            <div id="detailsB2BWrapper" style="display:none; margin-top:15px;" data-condition-field="interesseB2B" data-condition-values="oui_tres,oui_potentiellement">
+                <div>
+                    <label for="b2bRecherche">Quel(s) type(s) de PME recherchez-vous pour collaborations/partenariats ?</label>
+                    <p class="field-description">Ex: secteur d'activité, type de service/produit, etc.</p>
+                    <textarea id="b2bRecherche" name="b2bRecherche" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="b2bOffre">Qu'est-ce que votre entreprise peut offrir aux autres PME ?</label>
+                     <p class="field-description">Ex: produits, services, expertise spécifique.</p>
+                    <textarea id="b2bOffre" name="b2bOffre" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="b2bObjectifs">Vos objectifs principaux pour ces rencontres B2B ?</label>
+                    <p class="field-description">Ex: trouver des fournisseurs, des clients, des partenaires technologiques.</p>
+                    <textarea id="b2bObjectifs" name="b2bObjectifs" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Étape 5: Informations Complémentaires -->
+        <div class="step" id="step5">
+            <h2>Étape 5: Informations Complémentaires</h2>
+            <div>
+                <label for="restrictions">Avez-vous des restrictions alimentaires ou allergies à nous signaler (si repas/cocktail prévu) ?</label>
+                <input type="text" id="restrictions" name="restrictions">
+            </div>
+            <div>
+                <label for="sourceEvent">Comment avez-vous entendu parler de cet événement ?</label>
+                <select id="sourceEvent" name="sourceEvent">
+                    <option value="">-- Choisir --</option>
+                    <option value="email_awb">E-mail d'invitation Attijariwafa bank</option>
+                    <option value="conseiller_awb">Par mon conseiller Attijariwafa bank</option>
+                    <option value="site_web_rs">Site web / Réseaux sociaux de la banque</option>
+                    <option value="confrere">Recommandation d'un confrère / partenaire</option>
+                    <option value="publicite">Publicité</option>
+                    <option value="autre_source">Autre</option>
+                </select>
+                 <input type="text" id="autreSourceEventInput" name="autreSourceEventInput" placeholder="Précisez la source" style="display:none; margin-top:5px;">
+            </div>
+            <div>
+                <label for="commentaires">Avez-vous des questions ou des commentaires spécifiques ?</label>
+                <textarea id="commentaires" name="commentaires" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Étape 6: Consentement -->
+        <div class="step" id="step6">
+            <h2>Étape 6: Consentement</h2>
+            <div class="checkbox-group">
+                <div>
+                    <input type="checkbox" id="consent" name="consent" value="agree" required>
+                    <label for="consent" style="font-weight:normal;">J'accepte que les informations recueillies via ce formulaire soient utilisées par Attijariwafa bank dans le cadre de l'organisation de cet événement et pour me recontacter concernant ses offres et services. Je suis informé(e) que je dispose d'un droit d'accès, de rectification et de suppression de mes données. <span class="required-asterisk">*</span></label>
+                </div>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="button" id="prevBtn" class="prev" onclick="navigateStep(-1)" style="display:none;">Précédent</button>
+            <button type="button" id="nextBtn" onclick="navigateStep(1)">Suivant</button>
+            <button type="submit" id="submitBtn" style="display:none;">Soumettre mon inscription</button>
+        </div>
+    </form>
+
+    <div id="confirmationMessage" style="display:none;">
+        <h2>Merci pour votre inscription !</h2>
+        <p>Nous avons bien reçu vos informations. Vous recevrez prochainement un e-mail de confirmation avec plus de détails sur l'événement.</p>
+        <p>Pour toute question, n'hésitez pas à nous contacter à [votre adresse e-mail d'organisation].</p>
+        <p>Au plaisir de vous accueillir !</p>
+    </div>
+</div>
+
+<script>
+    let currentStepIndex = 0;
+    const form = document.getElementById('eventForm');
+    const steps = Array.from(form.querySelectorAll(".step"));
+    const formData = {};
+    const progressBarFill = document.getElementById('progressBarFill');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showStep(index) {
+        steps.forEach((step, i) => {
+            step.classList.toggle('active', i === index);
+        });
+        updateNavigationButtons();
+        updateProgressBar();
+        window.scrollTo(0,0); // Scroll to top when step changes
+    }
+
+    function updateNavigationButtons() {
+        const activeSteps = getActiveSteps();
+        const isFirstStep = currentStepIndex === 0;
+        const isLastStep = currentStepIndex === activeSteps.length - 1;
+
+        prevBtn.style.display = isFirstStep ? 'none' : 'inline-block';
+        nextBtn.style.display = isLastStep ? 'none' : 'inline-block';
+        submitBtn.style.display = isLastStep ? 'inline-block' : 'none';
+    }
+
+    function updateProgressBar() {
+        const activeSteps = getActiveSteps();
+        const progress = activeSteps.length > 0 ? ((currentStepIndex + 1) / activeSteps.length) * 100 : 0;
+        progressBarFill.style.width = `${progress}%`;
+        progressBarFill.textContent = `${Math.round(progress)}%`;
+    }
+
+    function getActiveSteps() {
+        // Filter steps based on conditions
+        return steps.filter(step => {
+            const conditionField = step.dataset.conditionField;
+            if (conditionField) {
+                const conditionValues = step.dataset.conditionValues.split(',');
+                const controllingInput = form.elements[conditionField];
+                let actualValue;
+                if (controllingInput) {
+                    if (controllingInput.type === 'radio' || (controllingInput.length && controllingInput[0].type === 'radio')) {
+                        const checkedRadio = form.querySelector(`input[name="${conditionField}"]:checked`);
+                        actualValue = checkedRadio ? checkedRadio.value : null;
+                    } else {
+                         actualValue = controllingInput.value;
+                    }
+                     return conditionValues.includes(actualValue);
+                }
+                return false; // If controlling field not found, hide step
+            }
+            return true; // No condition, always show
+        });
+    }
+
+    function recomputeStepIndicesAndShow() {
+        const activeStepsConfig = getActiveSteps();
+        const currentVisibleStepElement = steps[currentStepIndex]; // This is the logical step, not its visual order
+
+        // Re-map logical currentStepIndex to its new position in the filtered activeStepsConfig
+        let newVisualIndex = -1;
+        for(let i=0; i<activeStepsConfig.length; i++) {
+            if(activeStepsConfig[i].id === currentVisibleStepElement.id) {
+                newVisualIndex = i;
+                break;
+            }
+        }
+        
+        // If the current step is no longer active, try to go to the nearest valid step
+        if(newVisualIndex === -1 && activeStepsConfig.length > 0) {
+             // Heuristic: try to find the closest *previous* active step or first active step
+            let closestPreviousActiveIndex = -1;
+            for (let i = currentStepIndex -1; i >=0; i--) {
+                if(activeStepsConfig.find(s => s.id === steps[i].id)){
+                    closestPreviousActiveIndex = activeStepsConfig.findIndex(s => s.id === steps[i].id);
+                    break;
+                }
+            }
+            newVisualIndex = (closestPreviousActiveIndex !== -1) ? closestPreviousActiveIndex : 0;
+        } else if (newVisualIndex === -1 && activeStepsConfig.length === 0) {
+             newVisualIndex = 0; // Should not happen if form always has at least one step
+        }
+
+
+        // Hide all steps first
+        steps.forEach(s => s.classList.remove('active'));
+
+        // Show the (potentially new) current step
+        if (activeStepsConfig[newVisualIndex]) {
+             activeStepsConfig[newVisualIndex].classList.add('active');
+             // Update currentStepIndex to be the index within the *original* `steps` array
+             currentStepIndex = steps.findIndex(s => s.id === activeStepsConfig[newVisualIndex].id);
+        }
+        updateNavigationButtons();
+        updateProgressBar();
+    }
+
+
+    function navigateStep(direction) {
+        const activeStepsConfig = getActiveSteps();
+        const currentVisibleStepElement = steps[currentStepIndex]; // The current step DOM element
+        
+        // Find the index of the current step within the currently *active* steps
+        let currentVisualIndex = activeStepsConfig.findIndex(s => s.id === currentVisibleStepElement.id);
+
+        if (direction === 1) { // Moving Next
+            if (!validateStep(steps[currentStepIndex])) return;
+            saveStepData(steps[currentStepIndex]);
+        }
+        
+        const nextVisualIndex = currentVisualIndex + direction;
+
+        if (nextVisualIndex >= 0 && nextVisualIndex < activeStepsConfig.length) {
+            // Update currentStepIndex to point to the *original* index of the new active step
+            currentStepIndex = steps.findIndex(s => s.id === activeStepsConfig[nextVisualIndex].id);
+            showStep(currentStepIndex);
+        }
+    }
+
+    function validateStep(stepElement) {
+        let isValid = true;
+        clearErrorMessages(stepElement);
+
+        const inputs = stepElement.querySelectorAll('input[required], select[required], textarea[required]');
+        inputs.forEach(input => {
+            let fieldValid = true;
+            if (input.type === 'radio') {
+                const radioGroup = stepElement.querySelectorAll(`input[name="${input.name}"]`);
+                if (!Array.from(radioGroup).some(radio => radio.checked)) {
+                    fieldValid = false;
+                    displayErrorMessage(input, 'Veuillez sélectionner une option.');
+                }
+            } else if (input.type === 'checkbox') {
+                if (!input.checked) {
+                    fieldValid = false;
+                    displayErrorMessage(input, 'Ce champ doit être coché.');
+                }
+            } else if (input.type === 'email') {
+                if (!input.value.trim() || !/^\S+@\S+\.\S+$/.test(input.value.trim())) {
+                    fieldValid = false;
+                    displayErrorMessage(input, 'Veuillez entrer une adresse e-mail valide.');
+                }
+            } else if (!input.value.trim()) {
+                fieldValid = false;
+                displayErrorMessage(input, 'Ce champ est requis.');
+            }
+
+            if(!fieldValid) {
+                isValid = false;
+                input.classList.add('invalid');
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
+        return isValid;
+    }
+    
+    function displayErrorMessage(inputElement, message) {
+        let errorContainer = inputElement.closest('div').querySelector('.error-message');
+        if (!errorContainer) { // For radio/checkbox groups, the error might be for the group
+            const parentGroup = inputElement.closest('.radio-group') || inputElement.closest('.checkbox-group');
+            if (parentGroup) errorContainer = parentGroup.querySelector('.error-message');
+        }
+        if (errorContainer) {
+            errorContainer.textContent = message;
+        }
+    }
+
+    function clearErrorMessages(stepElement) {
+        stepElement.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+        stepElement.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+    }
+
+    function saveStepData(stepElement) {
+        const inputs = stepElement.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            if (input.type === 'checkbox') {
+                if (!formData[input.name]) formData[input.name] = [];
+                if (input.checked) {
+                    if (!formData[input.name].includes(input.value)) formData[input.name].push(input.value);
+                } else {
+                    formData[input.name] = formData[input.name].filter(val => val !== input.value);
+                }
+            } else if (input.type === 'radio') {
+                if (input.checked) formData[input.name] = input.value;
+            } else {
+                if (input.name) formData[input.name] = input.value.trim();
+            }
+        });
+        // console.log('Current formData:', JSON.parse(JSON.stringify(formData))); // Deep copy for logging
+    }
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (validateStep(steps[currentStepIndex])) {
+            saveStepData(steps[currentStepIndex]);
+            console.log('Formulaire final soumis:', formData);
+            // ICI: Vous enverriez formData à un serveur ou Google Apps Script
+
+            form.style.display = 'none';
+            document.querySelector('.progress-bar-container').style.display = 'none';
+            document.getElementById('confirmationMessage').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+    });
+    
+    // Initial setup for conditional fields
+    function setupConditionalDisplay(wrapperId, controllerName, showValues) {
+        const wrapper = document.getElementById(wrapperId);
+        if (!wrapper) return;
+
+        const controllers = form.elements[controllerName];
+        if (!controllers) return;
+
+        const toggleVisibility = () => {
+            let show = false;
+            if (controllers.type === 'radio' || (controllers.length && controllers[0].type === 'radio')) {
+                const checkedRadio = form.querySelector(`input[name="${controllerName}"]:checked`);
+                if (checkedRadio && showValues.includes(checkedRadio.value)) {
+                    show = true;
+                }
+            }
+            wrapper.style.display = show ? 'block' : 'none';
+            if (!show) { // Clear inputs if hidden
+                wrapper.querySelectorAll('input[type="text"], textarea').forEach(inp => inp.value = '');
+                wrapper.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(inp => inp.checked = false);
+            }
+            recomputeStepIndicesAndShow(); // Re-evaluate steps when visibility changes
+        };
+
+        if (controllers.length) { // Radio group
+            Array.from(controllers).forEach(radio => radio.addEventListener('change', toggleVisibility));
+        } else { // Single input (e.g. select, though not used here for controller)
+            controllers.addEventListener('change', toggleVisibility);
+        }
+        toggleVisibility(); // Initial check
+    }
+
+    // --- Initialize Event Listeners and Conditional Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+        showStep(currentStepIndex); // Show the first step
+
+        // Conditional display for "Autre Secteur"
+        const secteurSelect = document.getElementById('secteur');
+        const autreSecteurInput = document.getElementById('autreSecteurInput');
+        secteurSelect.addEventListener('change', function() {
+            autreSecteurInput.style.display = (this.value === 'autre_secteur') ? 'block' : 'none';
+            if (this.value !== 'autre_secteur') autreSecteurInput.value = '';
+        });
+
+        // Conditional display for "Autre Source Événement"
+        const sourceEventSelect = document.getElementById('sourceEvent');
+        const autreSourceEventInput = document.getElementById('autreSourceEventInput');
+        sourceEventSelect.addEventListener('change', function() {
+            autreSourceEventInput.style.display = (this.value === 'autre_source') ? 'block' : 'none';
+            if (this.value !== 'autre_source') autreSourceEventInput.value = '';
+        });
+        
+        // Conditional display for "Autre Domaine Expert"
+        const autreDomaineExpertCheckbox = document.getElementById('autre_domaine_expert_cb');
+        const autreDomaineExpertInput = document.getElementById('autreDomaineExpertInput');
+        autreDomaineExpertCheckbox.addEventListener('change', function() {
+            autreDomaineExpertInput.style.display = this.checked ? 'block' : 'none';
+            if (!this.checked) autreDomaineExpertInput.value = '';
+        });
+
+        // Conditional display for expert details and B2B details
+        setupConditionalDisplay('domainesExpertiseWrapper', 'rdvExpert', ['oui', 'peut-etre']);
+        setupConditionalDisplay('detailsB2BWrapper', 'interesseB2B', ['oui_tres', 'oui_potentiellement']);
+        
+        // Also recompute steps if participation changes (affects visibility of step 3 and 4)
+        const participationRadios = form.elements['participation'];
+         Array.from(participationRadios).forEach(radio => radio.addEventListener('change', recomputeStepIndicesAndShow));
+
+        recomputeStepIndicesAndShow(); // Initial call to set up correct view
+    });
+</script>
+
+</body>
+</html>
